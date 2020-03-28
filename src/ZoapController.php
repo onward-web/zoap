@@ -157,6 +157,13 @@ class ZoapController
                 $server->registerFaultException($this->exceptions);
                 $server->setOptions($this->options);
 
+                $classmap = [];
+                foreach($this->types as $key => $class) {
+                    $classmap[$key] = $class;
+                }
+                $server->setClassMap($classmap);
+
+
                 // Intercept response, then decide what to do with it.
                 $server->setReturnResponse(true);
                 $response = $server->handle();
